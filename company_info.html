@@ -14,7 +14,11 @@
 				<div class="container">
 					<div class="header_row">
 						<div class="header_logo">
-							<img src="#" alt="Логотип" />
+							<img
+								src="./public/logos/header/header.png"
+								alt="Логотип"
+								height="50"
+							/>
 						</div>
 
 						<nav>
@@ -67,16 +71,22 @@
 								</svg>
 							</div>
 							<div class="header_logo">
-								<img src="/images/logo.svg" alt="Логотип" />
+								<img
+									src="./public/logos/header/header.png"
+									alt="Логотип"
+									height="50"
+								/>
 							</div>
 						</div>
 
 						<div class="mobile_header__toggle" id="mobile-menu">
 							<nav>
 								<ul>
-									<li><a href="#">Главная</a></li>
-									<li><a href="#">О нас</a></li>
-									<li><a href="#">Контакты</a></li>
+									<li><a href="./index.html">Главная</a></li>
+									<li><a href="./index.html#schedule">О нас</a></li>
+									<li>
+										<a href="#">Сведения об образовательной организации</a>
+									</li>
 								</ul>
 							</nav>
 							<div class="mobile_header__contact">
@@ -95,8 +105,84 @@
 						Сведения об образовательной организации
 					</h1>
 					<div class="companyInfo__main">
-						<nav>
+						<!-- НА МОБИЛКУ -->
+						<!-- Кнопка-стрелочка ВНУТРИ блока, в верхнем левом углу -->
+						<button class="mobile-nav-toggle" id="mobile-nav-toggle">
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								width="20"
+								height="20"
+								viewBox="0 0 24 24"
+								fill="none"
+								stroke="currentColor"
+								stroke-width="2"
+								stroke-linecap="round"
+								stroke-linejoin="round"
+							>
+								<polyline points="15 18 9 12 15 6"></polyline>
+							</svg>
+						</button>
+						<!-- Ваш оригинальный nav (он будет скрыт на мобильных) -->
+						<nav class="companyInfo__sidebar_nav" id="sidebar-nav">
 							<ul class="companyInfo__sidebar">
+								<li>
+									<a class="companyInfo__sidebar_item active" href="#"
+										>Основные сведения</a
+									>
+								</li>
+								<li>
+									<a class="companyInfo__sidebar_item" href="#"
+										>Структура и органы управления</a
+									>
+								</li>
+								<li>
+									<a class="companyInfo__sidebar_item" href="#">Документы</a>
+								</li>
+								<li>
+									<a class="companyInfo__sidebar_item" href="#">Образование</a>
+								</li>
+								<li>
+									<a class="companyInfo__sidebar_item" href="#"
+										>Руководство и состав</a
+									>
+								</li>
+								<li>
+									<a class="companyInfo__sidebar_item" href="#"
+										>Материально-техническое обеспечение</a
+									>
+								</li>
+								<li>
+									<a class="companyInfo__sidebar_item" href="#"
+										>Платные услуги</a
+									>
+								</li>
+								<li>
+									<a class="companyInfo__sidebar_item" href="#"
+										>Финансово-хозяйственная деятельность</a
+									>
+								</li>
+								<li>
+									<a class="companyInfo__sidebar_item" href="#"
+										>Вакантные места</a
+									>
+								</li>
+								<li>
+									<a class="companyInfo__sidebar_item" href="#"
+										>Доступная среда</a
+									>
+								</li>
+								<li>
+									<a class="companyInfo__sidebar_item" href="#"
+										>Международное сотрудничество</a
+									>
+								</li>
+							</ul>
+						</nav>
+						<!-- НА МОБИЛКУ -->
+
+						<!-- НА КОМП -->
+						<nav>
+							<ul class="desktop_companyInfo__sidebar">
 								<li>
 									<a class="companyInfo__sidebar_item active" href="#"
 										>Основные сведения</a
@@ -153,6 +239,7 @@
 								</li>
 							</ul>
 						</nav>
+						<!-- НА КОМП -->
 
 						<div class="companyInfo__text">
 							<h1 class="companyInfo__text_title">
@@ -247,7 +334,7 @@
 			</div>
 		</footer>
 
-        <script>
+		<script>
 			document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 				anchor.addEventListener('click', function (e) {
 					e.preventDefault()
@@ -281,6 +368,41 @@
 						menu.classList.remove('active')
 						body.classList.remove('no-scroll')
 					})
+				})
+			})
+		</script>
+
+		<script>
+			document.addEventListener('DOMContentLoaded', function () {
+				const toggleBtn = document.getElementById('mobile-nav-toggle')
+				const sidebar = document.getElementById('sidebar-nav')
+				const body = document.body
+
+				toggleBtn.addEventListener('click', function () {
+					sidebar.classList.toggle('open')
+
+					// Блокируем скролл страницы
+					if (sidebar.classList.contains('open')) {
+						body.classList.add('no-scroll')
+					} else {
+						body.classList.remove('no-scroll')
+					}
+				})
+
+				// Закрытие при клике на ссылку
+				sidebar.querySelectorAll('a').forEach(link => {
+					link.addEventListener('click', () => {
+						sidebar.classList.remove('open')
+						body.classList.remove('no-scroll')
+					})
+				})
+
+				// Закрытие при клике вне меню (опционально)
+				document.addEventListener('click', function (e) {
+					if (!sidebar.contains(e.target) && !toggleBtn.contains(e.target)) {
+						sidebar.classList.remove('open')
+						body.classList.remove('no-scroll')
+					}
 				})
 			})
 		</script>

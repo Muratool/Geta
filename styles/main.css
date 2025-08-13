@@ -42,10 +42,6 @@ body {
 }
 
 .header_logo {
-	width: 118px;
-	height: 46px;
-	background: #0b41a7;
-	border-radius: 20px;
 }
 
 .header_menu {
@@ -300,6 +296,10 @@ body {
 	font-size: 14px;
 }
 
+.cards__card_text > p {
+	margin-bottom: 3px;
+}
+
 .cards__card_btn {
 	display: inline-block;
 	font-family: 'Nunito Sans';
@@ -432,7 +432,7 @@ body {
 
 .companyInfo__main nav {
 	flex: 0 0 30%; /* Занимает ровно 40% ширины */
-	max-width: 30%;
+	max-width: 50%;
 }
 
 .companyInfo__main .companyInfo__text {
@@ -440,7 +440,7 @@ body {
 	max-width: 70%;
 }
 
-.companyInfo__sidebar {
+.desktop_companyInfo__sidebar {
 	border-right: 2px solid #cfcfcf;
 }
 
@@ -507,13 +507,13 @@ p {
 
 /* МОБИЛЬНЫЙ ХЕДЕР */
 .mobile_header {
-	position: relative;
+	/* position: relative; */
 	font-family: sans-serif;
 }
 
 .mobile_header__visible {
-	position: sticky;
-	top: 0;
+	/* position: sticky; */
+	/* top: 0; */
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -677,17 +677,100 @@ p {
 /* Адаптив для страницы об организации */
 @media (max-width: 660px) {
 	.companyInfo__text_main div {
-    flex-direction: column;
-    gap: 8px;
-		
+		flex-direction: column;
+		gap: 8px;
 	}
-  .companyInfo__text_title{
-    font-size: 20px;
-    margin-bottom: 20px;
-  }
+	.companyInfo__text_title {
+		font-size: 20px;
+		margin-bottom: 20px;
+	}
 
-  .companyInfo__sidebar_item {
-	font-size: 14px;
-  word-wrap: break-word;
+	.companyInfo__sidebar_item {
+		font-size: 14px;
+		word-wrap: break-word;
+	}
 }
+
+@media (max-width: 425px) {
+	.main_row {
+		padding: 10px;
+	}
+}
+
+/*Компани инфо*/
+/* Контейнер */
+.companyInfo__main {
+	/* position: relative; */
+	padding: 20px;
+}
+
+/* Кнопка-стрелочка — внутри блока, не fixed */
+.mobile-nav-toggle {
+	display: none;
+	position: absolute;
+
+	top: 10px;
+	left: 10px;
+	background: #0b41a7;
+	color: white;
+	border: none;
+	width: 36px;
+	height: 36px;
+	border-radius: 8px;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+	cursor: pointer;
+	z-index: 10;
+	transition: background 0.2s;
+}
+
+.mobile-nav-toggle:hover {
+	background: #093688;
+}
+
+.mobile-nav-toggle svg {
+	stroke: white;
+}
+
+/* Выезжающее меню */
+.companyInfo__sidebar_nav {
+	position: absolute;
+	top: 0;
+	left: -400px; /* скрыто */
+	width: 400px;
+	height: 100vh;
+	background: white;
+	z-index: 9;
+	transition: left 0.4s ease;
+	box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+	overflow-y: auto;
+	padding-top: 50px;
+}
+
+.companyInfo__sidebar_nav.open {
+	left: 0; /* выезжает */
+}
+
+/* На мобильных: скрываем оригинальный nav на странице, показываем кнопку */
+@media (max-width: 767.98px) {
+	.companyInfo__main {
+		padding-left: 10px;
+		padding-right: 10px;
+	}
+
+	.mobile-nav-toggle {
+		display: block; /* стрелочка появляется */
+	}
+
+	/* Скрываем обычный nav (если он есть в разметке вне #sidebar-nav) */
+	.companyInfo__main > nav:not(#sidebar-nav) {
+		display: none;
+	}
+}
+
+/* На десктопе: выезжающее меню скрыто */
+@media (min-width: 768px) {
+	.mobile-nav-toggle,
+	.companyInfo__sidebar_nav {
+		display: none;
+	}
 }
